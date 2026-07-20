@@ -16,10 +16,6 @@ UHT에서 생성해주는 매크로로 주로 파일 경로가 들어간다.
 ### BODY_MACRO_COMBINE(A,B,C,D)
 ABCD를 이어 하나의 매크로로 만들어준다. 내부에서 BODY_MACRO_COMBINE_INNER를 호출해 A,B,C,D에 매크로가 있어도 변환 후 결합된다.
 
-### UNREAL_CPP_API
-ㅁㄴㅇ
-ㅁㄴㅇ
-
 ### PRAGMA_DISABLE_DEPRECATION_WARNINGS
 지원되지 않는 함수 등에 대한 경고 끄기
 
