@@ -345,3 +345,17 @@ UFunction* Z_Construct_UFunction_ATestActor_Test_ImplementableFunc()
 			});
 	}
 ```
+
+
+
+## 요약
+`UFUNCTION`은 **함수를 Unreal Reflection System에 등록하기 위한 매크로**이다.
+
+컴파일 전에 UHT가 `UFUNCTION`을 분석하여 `generated.h`와 `gen.cpp`를 생성한다.
+
+- **`generated.h`** : `GENERATED_BODY()`를 확장하고 Reflection에 필요한 선언을 생성한다.
+- **`gen.cpp`** : `Z_Construct_UFunction_*`, `Z_Construct_UClass_*` 등 Reflection 객체를 생성하는 코드와 등록 정보를 생성한다.
+
+ `Z_Construct_UFunction_*()`가 호출되면 `UFunction` 객체가 생성되어 등록된다.
+
+이렇게 등록된 `UFunction`은 `ProcessEvent()`, Blueprint 호출, 네트워크 RPC 등 Unreal의 Reflection 기능에서 사용된다.
