@@ -16,13 +16,14 @@ DECLARE_FUNCTION(execTest_NativeEnventFunc); \
 DECLARE_FUNCTION(execTest_UFunction);
 
 //BlueprintImplementableEvent의 경우는 .gen.cpp에서 구현부를 알아서 작성
-//보통 BPVM에서 해당 함수의 이름과 일치하는 노드를 찾아서 연결해줌
+//ProcessEvent를 이용해서 연결해줌
 ```
 
 * Keyword
 	* **BlueprintCallable**: cpp에서 작성한 코드를 BP에서 호출 가능
 	* **BlueprintImplementableEvent**: cpp에서 선언만, BP에서 구현
 		* 커스텀 이벤트로 만들면 안되고 반드시 오버라이드에서 뽑아 써야함
+		*  .gen.cpp에서 구현해주는 형태
 	* **BlueprintNativeEvent**: cpp에서 선언 및 구현 가능, BP에서 재정의 가능
 		* cpp에서 함수 이름 뒤에 \_Implementation을 붙여서 구현 해야함.
 		* 커스텀 이벤트로 만들면 안되고 반드시 오버라이드에서 뽑아 써야함
@@ -35,3 +36,59 @@ DECLARE_FUNCTION(execTest_UFunction);
 
 * **BlueprintPure**: 실행핀 없이 호출되는 함수(순서에 상관 없이)(BP에서 녹색으로 표시되는 노드들)
 	* Get 계열 함수에 적합
+
+```cpp
+// ********** Begin Class ATestActor Function Test_ImplementableFunc *******************************
+
+//BlueprintImplementableEvent 키워드 함수의 생성코드
+
+static FName NAME_ATestActor_Test_ImplementableFunc = FName(TEXT("Test_ImplementableFunc"));
+
+void ATestActor::Test_ImplementableFunc()
+{
+    UFunction* Func = FindFunctionChecked(NAME_ATestActor_Test_ImplementableFunc);
+    ProcessEvent(Func,NULL);
+}
+
+struct Z_Construct_UFunction_ATestActor_Test_ImplementableFunc_Statics
+{
+#if WITH_METADATA
+    static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+
+        { "ModuleRelativePath", "Public/TestActor.h" },
+    };
+
+#endif // WITH_METADATA
+// ********** Begin Function Test_ImplementableFunc constinit property declarations ****************
+// ********** End Function Test_ImplementableFunc constinit property declarations ******************
+
+    static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ATestActor_Test_ImplementableFunc_Statics::FuncParams = 
+{ 
+	{   (UObject*(*)())Z_Construct_UClass_ATestActor,
+		nullptr,
+		"Test_ImplementableFunc",
+		nullptr,
+		0,
+		0,
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		(EFunctionFlags)0x08080800,
+		0,
+		0, 
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ATestActor_Test_ImplementableFunc_Statics::Function_MetaDataParams), 
+		Z_Construct_UFunction_ATestActor_Test_ImplementableFunc_Statics::Function_MetaDataParams)
+	},  
+};
+
+UFunction* Z_Construct_UFunction_ATestActor_Test_ImplementableFunc()
+{
+    static UFunction* ReturnFunction = nullptr;
+    if (!ReturnFunction)
+    {
+        UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ATestActor_Test_ImplementableFunc_Statics::FuncParams);
+    }
+    return ReturnFunction;
+}
+```
