@@ -4,5 +4,7 @@
   "obsidian-excalidraw-plugin",
   "homepage",
   "obsidian-style-settings",
-  "obsidian-minimal-settings"
+  "obsidian-minimal-settings",
+  "image-converter",
+  "codeblock-customizer"
 ]
