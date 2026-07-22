@@ -1,0 +1,1 @@
+ABCD를 이어 하나의 매크로로 만들어준다. 내부에서 BODY_MACRO_COMBINE_INNER를 호출해 A,B,C,D에 매크로가 있어도 변환 후 결합된다.

@@ -1,0 +1,2 @@
+UHT에서 생성해주는 매크로로 주로 파일 경로가 들어간다.
+`CURRENT_FILE_ID FID_UEProjects_UnrealCpp_Source_Unreal_Cpp_Public_FloatingActor_h`
