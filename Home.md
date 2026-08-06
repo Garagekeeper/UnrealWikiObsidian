@@ -2,7 +2,7 @@
 ## 📚 
 C++ 
 - [[Macro 모음]]
-- [[Smart Pointer]] 
+- [[Smart Pointer in UE]] 
 - [[TArray]] 
 - [[UHT]]
 - [[UFUNCTION]] 
