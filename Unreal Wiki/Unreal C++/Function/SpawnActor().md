@@ -5,7 +5,7 @@
 
 매개변수로 들어간 클래스의 타입 그대로 생성한 것을 T* 로 변환한 것 뿐이다.
 
-```cpp file:World.h hlt:17
+```cpp file:World.h hlt:20
 /**
 	 * Spawn Actors with given transform and SpawnParameters
 	 * 
@@ -18,11 +18,14 @@
 	 */
 	UE_API AActor* SpawnActor( UClass* InClass, FVector const* Location=NULL, FRotator const* Rotation=NULL, const FActorSpawnParameters& SpawnParameters = FActorSpawnParameters() );
 
-	/** Templated version of SpawnActor that allows you to specify a class type via the template type */
+	/** 
+	 *  Templated version of SpawnActor that allows you to specify whole Transform
+	 *  class type via parameter while the return type is a parent class of that type 
+	 */
 	template< class T >
-	T* SpawnActor( const FActorSpawnParameters& SpawnParameters = FActorSpawnParameters() )
+	T* SpawnActor(UClass* Class, FTransform const& Transform,const FActorSpawnParameters& SpawnParameters = FActorSpawnParameters())
 	{
-		return CastChecked<T>(SpawnActor(T::StaticClass(), NULL, NULL, SpawnParameters),ECastCheckedType::NullAllowed);
+		return CastChecked<T>(SpawnActor(Class, &Transform, SpawnParameters), ECastCheckedType::NullAllowed);
 	}
 ```
 
