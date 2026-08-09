@@ -129,5 +129,47 @@ TArray를 쓰면서 주의할점 .Empty는 Clear임!
 
 ## 0314
 
+Pawn이나 Character에서 SetPlayerInputComponent를 사용해도 좋지만 조금 더 깔끔한 방법은 **플레이어 컨트롤러에서 입력 바인딩**을 하는게 좋다
 Pawn에서는 posses라는 개념이 중요함
-![[Rookiss cpp-1786256789080.webp]]
+![[Rookiss cpp-1786256789080.webp|541x214]]
+
+
+![[Rookiss cpp-1786257417994.webp|331x189]]
+```csharp
+// 헤더파일을 찾을 때 R1폴더를 기준으로 다시 찾아본다.
+PublicIncludePaths.AddRange(new String[]
+{
+	"R1"
+});
+```
+
+BuildString 말고 좋은 방법인듯
+![[Rookiss cpp-1786273695690.webp|772x355]]
+
+
+AddMovementInput()의 의미
+- Pawn에다가 추가
+- 움직이겠다는게 아니라, 움직일 방향을 입력하겟다!
+- 이것만으로는 폰이 움직이지 않음
+
+MovementComponent
+- AddMovementInput으로 추가된 입력들을 처리해서 실제 캐릭터를 이동시키는 컴포넌트
+- 내부에서 값을 조정해서 대각선 문제를 해결한다. 
+- 정규화를 통해서 해결하는구나 생각하기 쉽지만 내부에서 Clamp를 통해 최댓값을 1로 제한하는 방식
+	- 내부에서 1/root(size)를 [[SSE Intrinsic]](간단히 말하면 어셈블리와 가장 가까운 C 명령어)으로 빠르게 계산
+- 따라서 여기에 넣기전에 굳이 정규화를 안해줘도 된다.
+
+AddYawInput()
+- PlayerController에 추가
+- 왜 여기다가 넣었을까
+	- 고정 시점이 아닌 경우에 w를 누르면 카메라의 앞쪽으로 가야할까, 플레이어의 앞쪽으로 가야할까?
+	- 이런 고민들을 해결하기 위해서 UE는 컨트롤러에 회전 입력을 기록해놓고 원하는대로 처리
+- GetControlRoation을 통해서 기록된 회전값을 가져오는 것이다.
+- 그러니까 usecontrolleryaw하면 기록된 회전값으로 pawn이 회전하는 것
+
+CharacterMovementComponent
+- 이 컴포넌트는 오직 캐릭터에만 붙어서 작동한다. 폰에 붙으면 작동 안함
+- 조금 더 디테일한 회전 조절 가능
+	- 움직이지 않을 때 마우스를 돌리면 가만히 있지만, 움직일때는 마우스를 따라가게
+		![[Rookiss cpp-1786282418360.webp]]
+- 
