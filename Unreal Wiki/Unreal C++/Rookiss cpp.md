@@ -126,3 +126,8 @@ TArray를 쓰면서 주의할점 .Empty는 Clear임!
 
 월드 좌표
 로컬 좌표
+
+## 0314
+
+Pawn에서는 posses라는 개념이 중요함
+![[Rookiss cpp-1786256789080.webp]]
