@@ -2,7 +2,7 @@
 `std::shared_ptr`를 UE에서 구현한 버전이다. 주의할 점은 `UObject System`에 의해서 관리되는 객체에는 사용할 수 없다.
 구현된 코드를 살펴보면 2가지 멤버 변수를 가지고 있다. TSharedPtr이 참조할 대상의 주소를 담을 포인터 변수와 참조카운트를 관리할 변수를 FSharedReferencer타입으로 들고 있다. 여기서 Mode는 ESPMode를 의미하며 Fast와 ThreadSafe가 존재한다.
 
-여태 공부한 바로는 TSharedPtr이 제어블록의 포인터를 들고 있어야하지만 단순히 변수로 들고 있는걸 볼 수 있는데, 이는 FSharedReferencer내부에 제어블록을 가리키는 포인터가 있기 때문이다.
+지금까지의 공부를 기반으로 생각해보면 TSharedPtr이 제어블록의 포인터를 들고 있어야하지만 단순히 변수로 들고 있는걸 볼 수 있는데, 이는 FSharedReferencer내부에 제어블록을 가리키는 포인터가 있기 때문이다.
 ```cpp file:SharedPointer.h hlt:2,8
 	/** The object we're holding a reference to.  Can be nullptr. */
 	// 참조할 대상
