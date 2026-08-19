@@ -21,3 +21,9 @@ Macro를 언어 그대로 받아들이면 Micro의 반대의미 즉, 거대한 �
 ### [[ProjectName_API]]
 
 ### [[check(expreesion)]]
+
+[[UFUNCTION]]
+
+[[UPROPERTY]]
+
+[[USTRUCT]]
