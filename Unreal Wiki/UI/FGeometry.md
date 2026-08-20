@@ -1,0 +1,3 @@
+# [FGeometry](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/SlateCore/FGeometry)
+공식 설명에 따르면 Slate에서 Widget의 위치, 크기 그리고 절대위치등을 표현하는 구조체라고 한다. 주로 어떤 위젯에대한 정보를 제공하기 위해서 [[SWidget]]과 함께 사용된다고 한다.
+여기서 절대좌표란 화면좌표계를 기준으로 해당 위젯이 어디서 시작하는지를 의미하는데, 게임화면의 좌상단에서(0,0)으로 시작하는게 아니라 모니터 기준 좌상단이 (0,0)으로 시작하는 좌표를 의미한다. 여기서 위치 크기등은 화면 해상도에 따라서 바뀔 수 있기때문에 `GetTickSpaceGeometry()`을 통해서 가장 최근의 값을 가져오는것이 좋다. 주의할 점은 `GetTickSpaceGeometry()`은 저번 프레임에서의 랜더링 결과를 가져오기 때문에 `NativeConstruct` 같은 타이밍의 함수에서는 크기와 위치의 값이 비어있다. 첫 번째 NativeTick 이후로 유용하다.
